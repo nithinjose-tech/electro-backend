@@ -9,6 +9,7 @@ router.post("/", ElectroController.create);
 router.get("/:id", ElectroController.findOne);
 // Update a user with id
 router.put("/:id", ElectroController.update);
+
 // Delete a user with id
 router.delete("/:id", ElectroController.delete);
 module.exports = router;

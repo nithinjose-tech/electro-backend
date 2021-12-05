@@ -34,6 +34,7 @@ exports.create = (req, res) => {
     rate: req.body.rate,
     type: req.body.type,
     systemType: req.body.systemType,
+    notification: req.body.notification,
   });
   // Save Electro in the database
   electro
@@ -78,6 +79,27 @@ exports.update = (req, res) => {
       message: "Please fill all required field",
     });
   }
+
+  Electro.findOne({ _id: req.params.id }, async (err, doc) => {
+    if (doc) {
+      console.log(doc, req.params.id);
+      const needed = await doc.ComplainsandServices;
+      const neededNotification = await doc.notification;
+      // const index = await needed.findIndex((element,index)=>element._id===)
+      // needed[index]={}
+      console.log(needed, "hdftydsfygyt");
+      doc.ComplainsandServices = [...needed, ...req.body.ComplainsandServices];
+      doc.notification = [...neededNotification, ...req.body.notification];
+      doc.markModified("ComplainsandServices");
+      doc.markModified("notification");
+      doc.save((err, docs) => {
+        // console.log(err, docs);
+        if (err) {
+          res.status(404).send({ error: err });
+        }
+      });
+    }
+  });
   // Find Electro and update it with the request body
 
   Electro.findByIdAndUpdate(
@@ -87,7 +109,7 @@ exports.update = (req, res) => {
       name: req.body.name,
       address: req.body.address,
       meterId: req.body.meterId,
-      ComplainsandServices: req.body.ComplainsandServices,
+      // ComplainsandServices: req.body.ComplainsandServices,
       consumedEnergy: req.body.consumedEnergy,
       email: req.body.email,
       phone: req.body.phone,

@@ -30,6 +30,7 @@ const ElectroSchema = mongoose.Schema(
       enum: ["INDUSTRY", "EDUCATION", "HOUSEHOLD", "HOSPITAL"],
     },
     systemType:String,
+    notification:[],
   },
   {
     timestamps: true,
