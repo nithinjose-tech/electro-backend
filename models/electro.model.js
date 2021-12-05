@@ -9,15 +9,27 @@ const ElectroSchema = mongoose.Schema(
     name: String,
     address: String,
     meterId: Number,
-    Complains: String,
+    ComplainsandServices: [
+      
+      {
+        type: {
+          type: String,
+          enum: ["COMPLAINT", "SERVICES"],
+        },
+        details: {
+          type: String,
+        },
+      },
+    ],
     consumedEnergy: Number,
     email: String,
     phone: Number,
     rate: Number,
     type: {
       type: String,
-      enum: ["INDUSTRY", "EDUCATION","HOUSEHOLD","HOSPITAL"],
+      enum: ["INDUSTRY", "EDUCATION", "HOUSEHOLD", "HOSPITAL"],
     },
+    systemType:String,
   },
   {
     timestamps: true,

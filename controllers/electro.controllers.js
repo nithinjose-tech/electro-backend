@@ -21,17 +21,19 @@ exports.create = (req, res) => {
     });
   }
   // Create a new Electro
+
   const electro = new Electro({
     role: req.body.role,
     name: req.body.name,
     address: req.body.address,
     meterId: req.body.meterId,
-    Complains: req.body.Complains,
+    ComplainsandServices: req.body.ComplainsandServices,
     consumedEnergy: req.body.consumedEnergy,
     email: req.body.email,
     phone: req.body.phone,
     rate: req.body.rate,
     type: req.body.type,
+    systemType: req.body.systemType,
   });
   // Save Electro in the database
   electro
@@ -77,13 +79,21 @@ exports.update = (req, res) => {
     });
   }
   // Find Electro and update it with the request body
+
   Electro.findByIdAndUpdate(
     req.params.id,
     {
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.last_name,
-      phone: req.body.last_name,
+      role: req.body.role,
+      name: req.body.name,
+      address: req.body.address,
+      meterId: req.body.meterId,
+      ComplainsandServices: req.body.ComplainsandServices,
+      consumedEnergy: req.body.consumedEnergy,
+      email: req.body.email,
+      phone: req.body.phone,
+      rate: req.body.rate,
+      type: req.body.type,
+      systemType: req.body.systemType,
     },
     { new: true }
   )
